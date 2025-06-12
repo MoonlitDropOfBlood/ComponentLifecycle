@@ -1,0 +1,9 @@
+{
+  "name": "component-lifecycle",
+  "version": "1.0.0",
+  "description": "鸿蒙版本的Lifecycle库，支持组件、Router和Navigation",
+  "main": "Index.ts",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

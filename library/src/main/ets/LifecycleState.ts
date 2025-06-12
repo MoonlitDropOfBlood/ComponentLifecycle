@@ -1,0 +1,11 @@
+export enum LifecycleState {
+  INITIALIZED,
+  ON_APPEAR,
+  ON_WILL_SHOW,
+  ON_SHOWED,
+  ON_ACTIVE,
+  ON_INACTIVE,
+  ON_WILL_HIDE,
+  ON_HIDDEN,
+  ON_DISAPPEAR,
+}
