@@ -1,6 +1,8 @@
+import { ZRouter } from '@hzw/zrouter';
 import { AppRouter } from '@zhongrui/app_router';
 import { Lifecycle, LifecycleOwner } from 'component-lifecycle';
 import { Custom1Component } from './CustomComponent';
+import { router, Router } from '@kit.ArkUI';
 
 @Entry
 @Component
@@ -25,7 +27,8 @@ struct Index {
   }
 
   build() {
-    Navigation(AppRouter.getRootStack()) {
+    // Navigation(AppRouter.getRootStack()) {
+    Navigation(ZRouter.getNavStack()){
       RelativeContainer() {
         Custom1Component()
         Text(this.message)
@@ -38,13 +41,19 @@ struct Index {
           })
           .onClick(() => {
             this.message = 'Welcome';
-            AppRouter.push("entry/TestNav1Child")
+            // AppRouter.push("entry/TestNav1Child")
+            ZRouter.getInstance().push("entry/TestNav1Child")
+          })
+
+        Button('跳转')
+          .onClick(() => {
+            router.pushUrl({url:'pages/TestPage'})
           })
       }
       .height('100%')
       .width('100%')
     }
-    .navDestination(this.getBuilder)
+    // .navDestination(this.getBuilder)
   }
 
   onDidBuild(): void {

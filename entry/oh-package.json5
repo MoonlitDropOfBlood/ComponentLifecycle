@@ -8,6 +8,7 @@
   "dependencies": {
     "component-lifecycle": "file:../library",
     "@zhongrui/app_router": "^1.0.7",
+    "@hzw/zrouter": "^1.5.0"
   }
 }
 

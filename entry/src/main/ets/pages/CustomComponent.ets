@@ -4,6 +4,10 @@ import { Lifecycle, LifecycleOwner } from "component-lifecycle";
 export struct Custom1Component{
   @LifecycleOwner lifecycle = new Lifecycle()
 
+  aboutToAppear(): void {
+
+  }
+
   build() {
     Column(){}
     .width(10)
