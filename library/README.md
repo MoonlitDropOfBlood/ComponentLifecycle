@@ -1,6 +1,6 @@
 # ComponentLifecycle
 
-[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.0-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases)
+[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.1-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases)
 
 ## 简介
 
