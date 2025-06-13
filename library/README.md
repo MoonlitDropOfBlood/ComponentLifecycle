@@ -24,8 +24,6 @@ OpenHarmony ohpm
 
 ## 使用说明
 
-### 可选初始化
-
 ```
 import { Lifecycle, LifecycleOwner } from "@duke/component-lifecycle";
 import { LifecycleState } from "@duke/component-lifecycle";
