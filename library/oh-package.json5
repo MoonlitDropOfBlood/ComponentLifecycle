@@ -1,6 +1,6 @@
 {
   "name": "@duke/component-lifecycle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "鸿蒙版本的Lifecycle库，支持组件、Router和Navigation",
   "main": "Index.ts",
   "author": "duke",

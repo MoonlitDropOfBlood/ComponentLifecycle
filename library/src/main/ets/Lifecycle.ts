@@ -2,13 +2,15 @@ import hilog from "@ohos.hilog";
 import { LifecycleEventObserver } from "./LifecycleEventObserver";
 import { LifecycleState } from "./LifecycleState";
 import { FrameNode, UIContext, uiObserver } from "@kit.ArkUI";
+import { LIFECYCLE_INIT } from "./Constants";
 
 export function LifecycleOwner(target: any, name: string) {
   if (!target.rerender) {
     hilog.warn(0x0000, 'Lifecycle', '%{public}s', 'LifecycleOwn current target is not a component')
     return
   }
-  let lifecycleInit = function () {
+  target[LIFECYCLE_INIT] = function () {
+    //将来可以在这里进行注入，方便其他库中进行注入
     let lifecycle = this[name] as Lifecycle
     createAppear(lifecycle, this)
     let uiContext: UIContext = this.getUIContext()
@@ -29,11 +31,11 @@ export function LifecycleOwner(target: any, name: string) {
     const oldFunction = target.aboutToAppear;
     target.aboutToAppear = function () {
       oldFunction.call(this);
-      lifecycleInit.call(this)
+      this[LIFECYCLE_INIT].call(this)
     };
   } else {
     target.aboutToAppear = function () {
-      lifecycleInit.call(this)
+      this[LIFECYCLE_INIT].call(this)
     }
   }
   target.lifecycleRegister = function () {
