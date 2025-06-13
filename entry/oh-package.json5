@@ -6,7 +6,8 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "component-lifecycle": "file:../library"
+    "component-lifecycle": "file:../library",
+    "@zhongrui/app_router": "^1.0.7",
   }
 }
 

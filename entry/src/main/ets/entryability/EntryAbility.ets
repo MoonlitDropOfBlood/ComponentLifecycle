@@ -1,11 +1,21 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import { AppRouter } from '@zhongrui/app_router';
+import { getEntryRouterMap } from '../_generated/AutoRouterMap';
+import { BuildRegister } from '../_generated/AutoRouterBuilder';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    AppRouter.init([], {
+      entryMapList: () => getEntryRouterMap(),
+      entryBuilder: (group: string, name: string) => {BuildRegister(group, name)},
+      debug: true,
+      isMultiPacket: false,
+      initAllMap:true
+    })
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
   }

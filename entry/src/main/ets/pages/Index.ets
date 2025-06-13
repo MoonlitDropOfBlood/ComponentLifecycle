@@ -1,3 +1,4 @@
+import { AppRouter } from '@zhongrui/app_router';
 import { Lifecycle, LifecycleOwner } from 'component-lifecycle';
 import { Custom1Component } from './CustomComponent';
 
@@ -6,6 +7,12 @@ import { Custom1Component } from './CustomComponent';
 struct Index {
   @State message: string = 'Hello World';
   @LifecycleOwner lifecycle: Lifecycle = new Lifecycle()
+
+  @Builder
+  getBuilder(path: string) {
+    //此处写法固定，不会随着组件数量增加而增加额外逻辑
+    AppRouter.getBuilderByPath(path)?.builder(path as Object)
+  }
 
   aboutToAppear(): void {
     this.lifecycle.addObserver((owner, state) => {
@@ -18,7 +25,7 @@ struct Index {
   }
 
   build() {
-    Navigation() {
+    Navigation(AppRouter.getRootStack()) {
       RelativeContainer() {
         Custom1Component()
         Text(this.message)
@@ -31,11 +38,13 @@ struct Index {
           })
           .onClick(() => {
             this.message = 'Welcome';
+            AppRouter.push("entry/TestNav1Child")
           })
       }
       .height('100%')
       .width('100%')
     }
+    .navDestination(this.getBuilder)
   }
 
   onDidBuild(): void {

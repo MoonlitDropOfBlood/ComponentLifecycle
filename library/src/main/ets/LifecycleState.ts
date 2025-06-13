@@ -4,8 +4,8 @@ export enum LifecycleState {
   ON_WILL_SHOW,
   ON_SHOWED,
   ON_ACTIVE,
-  ON_INACTIVE,
   ON_WILL_HIDE,
+  ON_INACTIVE,
   ON_HIDDEN,
   ON_DISAPPEAR,
 }

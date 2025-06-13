@@ -50,55 +50,30 @@ export function LifecycleOwner(target: any, name: string) {
     let parentNode = frameNode?.getParent()
     if (parentNode == null || parentNode == undefined) { //这个是Router首页
       lifecycle.isPage = true
-      lifecycle.isRouterPage = true
-      let currentPageInfo = uiContext.getPageInfoByUniqueId(uniqueId).routerPageInfo
-      let pageChange = function (pageInfo: uiObserver.RouterPageInfo) {
-        if (currentPageInfo?.pageId != pageInfo.pageId) { //其他页面不需处理
-          return
+      lifecycle.isNavigation = frameNode.getNodeType() == "NavDestination"
+      lifecycle.isRouterPage = !lifecycle.isNavigation
+      if (lifecycle.isRouterPage) {
+        let currentPageInfo = uiContext.getPageInfoByUniqueId(uniqueId).routerPageInfo
+        let pageChange = function (pageInfo: uiObserver.RouterPageInfo) {
+          if (currentPageInfo?.pageId != pageInfo.pageId) { //其他页面不需处理
+            return
+          }
+          if (pageInfo.state == uiObserver.RouterPageState.ON_PAGE_SHOW) {
+            lifecycle['handler'](LifecycleState.ON_SHOWED)
+          } else if (pageInfo.state == uiObserver.RouterPageState.ON_PAGE_HIDE) {
+            lifecycle['handler'](LifecycleState.ON_HIDDEN)
+          } else if (pageInfo.state == uiObserver.RouterPageState.ABOUT_TO_DISAPPEAR) {
+            uiContext.getUIObserver().off('routerPageUpdate', pageChange)
+          }
         }
-        if (pageInfo.state == uiObserver.RouterPageState.ON_PAGE_SHOW) {
-          lifecycle['handler'](LifecycleState.ON_SHOWED)
-        } else if (pageInfo.state == uiObserver.RouterPageState.ON_PAGE_HIDE) {
-          lifecycle['handler'](LifecycleState.ON_HIDDEN)
-        } else if (pageInfo.state == uiObserver.RouterPageState.ABOUT_TO_DISAPPEAR) {
-          uiContext.getUIObserver().off('routerPageUpdate', pageChange)
-        }
+        uiContext.getUIObserver().on('routerPageUpdate', pageChange)
+      } else if (lifecycle.isNavigation) {
+        let currentPageInfo = uiContext.getPageInfoByUniqueId(frameNode.getFirstChild().getUniqueId()).navDestinationInfo
+        uiContext.getUIObserver().on('navDestinationUpdate', createNavChange(currentPageInfo, lifecycle, uiContext))
       }
-      uiContext.getUIObserver().on('routerPageUpdate', pageChange)
-    } else {
-      let child = parentNode.getFirstChild()
-      let currentPageInfo: uiObserver.NavDestinationInfo
-      let pageChange = function (pageInfo: uiObserver.NavDestinationInfo) {
-        if (currentPageInfo?.uniqueId != pageInfo.uniqueId) { //其他页面不需处理
-          return
-        }
-        if (pageInfo.state == uiObserver.NavDestinationState.ON_SHOWN) {
-          lifecycle['handler'](LifecycleState.ON_SHOWED)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_HIDDEN) {
-          lifecycle['handler'](LifecycleState.ON_HIDDEN)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_WILL_SHOW) {
-          lifecycle['handler'](LifecycleState.ON_WILL_SHOW)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_WILL_HIDE) {
-          lifecycle['handler'](LifecycleState.ON_WILL_HIDE)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_ACTIVE) {
-          lifecycle['handler'](LifecycleState.ON_ACTIVE)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_INACTIVE) {
-          lifecycle['handler'](LifecycleState.ON_INACTIVE)
-        } else if (pageInfo.state == uiObserver.NavDestinationState.ON_DISAPPEAR) {
-          uiContext.getUIObserver().off('navDestinationUpdate', pageChange)
-        }
-      }
-      if (child?.getNodeType() == "NavDestination") {
-        lifecycle.isPage = true
-        lifecycle.isNavigation = true
-        currentPageInfo = uiContext.getPageInfoByUniqueId(child.getFirstChild().getUniqueId()).navDestinationInfo
-        uiContext.getUIObserver().on('navDestinationUpdate', pageChange)
-      } else if (parentNode.getNodeType() == "NavDestination") {
-        lifecycle.isPage = true
-        lifecycle.isNavigation = true
-        currentPageInfo = uiContext.getPageInfoByUniqueId(uniqueId).navDestinationInfo
-        uiContext.getUIObserver().on('navDestinationUpdate', pageChange)
-      }
+    } else if(parentNode.getNodeType() == 'NavDestination'){
+      let currentPageInfo = uiContext.getPageInfoByUniqueId(frameNode.getUniqueId()).navDestinationInfo
+      uiContext.getUIObserver().on('navDestinationUpdate', createNavChange(currentPageInfo, lifecycle, uiContext))
     }
   }
   if (target.onDidBuild) {
@@ -110,6 +85,31 @@ export function LifecycleOwner(target: any, name: string) {
   } else {
     target.onDidBuild = target.lifecycleRegister
   }
+}
+
+function createNavChange(currentPageInfo: uiObserver.NavDestinationInfo | undefined, lifecycle: Lifecycle,
+  uiContext: UIContext) {
+  let pageChange = function (pageInfo: uiObserver.NavDestinationInfo) {
+    if (currentPageInfo?.uniqueId != pageInfo.uniqueId) { //其他页面不需处理
+      return
+    }
+    if (pageInfo.state == uiObserver.NavDestinationState.ON_SHOWN) {
+      lifecycle['handler'](LifecycleState.ON_SHOWED)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_HIDDEN) {
+      lifecycle['handler'](LifecycleState.ON_HIDDEN)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_WILL_SHOW) {
+      lifecycle['handler'](LifecycleState.ON_WILL_SHOW)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_WILL_HIDE) {
+      lifecycle['handler'](LifecycleState.ON_WILL_HIDE)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_ACTIVE) {
+      lifecycle['handler'](LifecycleState.ON_ACTIVE)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_INACTIVE) {
+      lifecycle['handler'](LifecycleState.ON_INACTIVE)
+    } else if (pageInfo.state == uiObserver.NavDestinationState.ON_DISAPPEAR) {
+      uiContext.getUIObserver().off('navDestinationUpdate', pageChange)
+    }
+  }
+  return pageChange
 }
 
 
