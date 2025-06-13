@@ -1,9 +1,15 @@
 {
-  "name": "component-lifecycle",
+  "name": "@duke/component-lifecycle",
   "version": "1.0.0",
   "description": "鸿蒙版本的Lifecycle库，支持组件、Router和Navigation",
   "main": "Index.ts",
-  "author": "",
-  "license": "Apache-2.0",
+  "author": "duke",
+  "license": "MIT",
+  "keywords": [
+    "lifecycle",
+    "HarmonyOS",
+  ],
+  "repository": "https://gitee.com/Duke_Bit/eventpost",
+  "homepage": "https://gitee.com/Duke_Bit",
   "dependencies": {}
 }

@@ -1,7 +1,7 @@
 import hilog from "@ohos.hilog";
 import { LifecycleEventObserver } from "./LifecycleEventObserver";
 import { LifecycleState } from "./LifecycleState";
-import { FrameNode, PageInfo, UIContext, uiObserver } from "@kit.ArkUI";
+import { FrameNode, UIContext, uiObserver } from "@kit.ArkUI";
 
 export function LifecycleOwner(target: any, name: string) {
   if (!target.rerender) {
@@ -55,6 +55,10 @@ export function LifecycleOwner(target: any, name: string) {
           uiContext.getPageInfoByUniqueId(frameNode.getFirstChild().getUniqueId()).navDestinationInfo
         createNavChange(currentPageInfo?.navDestinationId, lifecycle, uiContext)
       }
+    } else {
+      frameNode.commonEvent.setOnVisibleAreaApproximateChange({ ratios: [0] }, (isVisible: boolean) => {
+        lifecycle['handler'](isVisible ? LifecycleState.ON_SHOWED : LifecycleState.ON_HIDDEN)
+      })
     }
   }
   if (target.onDidBuild) {

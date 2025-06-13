@@ -1,5 +1,5 @@
 import { RouterPath } from "@zhongrui/app_router"
-import { Lifecycle, LifecycleOwner } from "component-lifecycle"
+import { Lifecycle, LifecycleOwner } from "@duke/component-lifecycle"
 import { ZRoute } from "@hzw/zrouter"
 
 @ZRoute({ name: "entry/TestNav1Child"})

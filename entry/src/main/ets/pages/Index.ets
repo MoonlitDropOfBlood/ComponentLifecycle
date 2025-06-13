@@ -1,6 +1,6 @@
 import { ZRouter } from '@hzw/zrouter';
 import { AppRouter } from '@zhongrui/app_router';
-import { Lifecycle, LifecycleOwner } from 'component-lifecycle';
+import { Lifecycle, LifecycleOwner } from '@duke/component-lifecycle';
 import { Custom1Component } from './CustomComponent';
 import { router, Router } from '@kit.ArkUI';
 

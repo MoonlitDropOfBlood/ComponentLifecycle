@@ -1,4 +1,4 @@
-import { Lifecycle, LifecycleOwner } from 'component-lifecycle';
+import { Lifecycle, LifecycleOwner } from '@duke/component-lifecycle';
 
 @Entry
 @ComponentV2
