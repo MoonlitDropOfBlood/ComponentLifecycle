@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "io.duke.myapplication",
+    "bundleName": "io.duke.lifecycle",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
