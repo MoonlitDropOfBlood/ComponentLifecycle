@@ -1,8 +1,8 @@
 # ComponentLifecycle
 
-[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.2-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases)
-
 ## 简介
+
+[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.2-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases)
 
 ComponentLifecycle，是一个库，用于存储有关组件（如 Router 或 NavDestination）的生命周期状态的信息，并允许其他对象观测此状态。
 支持目前两种路由形式Router和NavDestination。
@@ -109,3 +109,9 @@ DevEco Studio: 5.0.5.315, SDK: HarmonyOS 5.0.1 Release Ohos_sdk_public 5.0.1.115
 ## 开源协议
 
 本项目基于 [MIT license](https://gitee.com/Duke_Bit/component-lifecycle/blob/master/LICENSE) ，请自由地享受和参与开源。
+
+## 其他库
+
+- eventpost 事件分发，支持组件中的lifecycle，在组件中使用自动取消订阅: [https://gitee.com/Duke_Bit/eventpost](https://gitee.com/Duke_Bit/eventpost)
+- @duke/elf-dialog CustomDialog黑魔法 不依赖promptAction 实现的函数级弹窗，省去复杂的模版代码，让你专注于你的业务，一行代码搞定弹窗: [https://gitee.com/Duke_Bit/elf-dialog](https://gitee.com/Duke_Bit/elf-dialog)
+- @duke/elf-refresh OpenHarmony 刷新组件，支持下拉刷新和上拉加载更多，支持各种组件，List、Grid，支持header，footer，目标打造HarmonyOS的SmartRefreshLayout: [https://gitee.com/Duke_Bit/ElfRefresh](https://gitee.com/Duke_Bit/ElfRefresh)
