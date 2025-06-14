@@ -10,7 +10,7 @@
     "生命周期",
     "HarmonyOS",
   ],
-  "repository": "https://gitee.com/Duke_Bit/eventpost",
+  "repository": "https://gitee.com/Duke_Bit/component-lifecycle/",
   "homepage": "https://gitee.com/Duke_Bit",
   "dependencies": {}
 }
