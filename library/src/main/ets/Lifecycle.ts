@@ -2,7 +2,7 @@ import hilog from "@ohos.hilog";
 import { LifecycleEventObserver } from "./LifecycleEventObserver";
 import { LifecycleState } from "./LifecycleState";
 import { FrameNode, UIContext, uiObserver } from "@kit.ArkUI";
-import { LIFECYCLE_INIT } from "./Constants";
+import { LIFECYCLE_DEFAULT, LIFECYCLE_INIT } from "./Constants";
 
 export function LifecycleOwner(target: any, name: string) {
   if (!target.rerender) {
@@ -31,10 +31,16 @@ export function LifecycleOwner(target: any, name: string) {
     const oldFunction = target.aboutToAppear;
     target.aboutToAppear = function () {
       oldFunction.call(this);
+      if(this[name]){
+        this[LIFECYCLE_DEFAULT] = this[name]
+      }
       this[LIFECYCLE_INIT].call(this)
     };
   } else {
     target.aboutToAppear = function () {
+      if(this[name]){
+        this[LIFECYCLE_DEFAULT] = this[name]
+      }
       this[LIFECYCLE_INIT].call(this)
     }
   }
