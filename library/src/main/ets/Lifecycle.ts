@@ -4,7 +4,7 @@ import { LifecycleState } from "./LifecycleState";
 import { FrameNode, UIContext, uiObserver } from "@kit.ArkUI";
 import { LIFECYCLE_DEFAULT, LIFECYCLE_INIT } from "./Constants";
 
-export function LifecycleOwner(target: any, name: string) {
+export const LifecycleOwner:PropertyDecorator = (target: any, name: string) => {
   if (!target.rerender) {
     hilog.warn(0x0000, 'Lifecycle', '%{public}s', 'LifecycleOwn current target is not a component')
     return

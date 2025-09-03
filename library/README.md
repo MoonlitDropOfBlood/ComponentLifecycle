@@ -2,7 +2,7 @@
 
 ## 简介
 
-[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.2-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases)
+[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.3-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases/tag/v1.0.3)
 
 ComponentLifecycle，是一个库，用于存储有关组件（如 Router 或 NavDestination）的生命周期状态的信息，并允许其他对象观测此状态。
 支持目前两种路由形式Router和NavDestination。
@@ -112,6 +112,10 @@ DevEco Studio: 5.0.5.315, SDK: HarmonyOS 5.0.1 Release Ohos_sdk_public 5.0.1.115
 
 ## 其他库
 
+- [@duke/logan-ext](https://ohpm.openharmony.cn/#/cn/detail/@duke%2Flogan-ext) Logan扩展库，方便开箱即用: [https://gitee.com/Duke_Bit/logan](https://gitee.com/Duke_Bit/logan)
+- [@duke/logan](https://ohpm.openharmony.cn/#/cn/detail/@duke%2Flogan) Logan是一个为OpenHarmony开发的日志库，对美团技术团队的Logan的鸿蒙化移植版本: [https://gitee.com/Duke_Bit/logan](https://gitee.com/Duke_Bit/logan)
+- [@duke/websocket-client](https://ohpm.openharmony.cn/#/cn/detail/@duke%2Fwebsocket-client)
+  WebSocket库解决官方API的一些bug问题: [https://gitee.com/Duke_Bit/websocket](https://gitee.com/Duke_Bit/websocket)
 - eventpost 事件分发，支持组件中的lifecycle，在组件中使用自动取消订阅: [https://gitee.com/Duke_Bit/eventpost](https://gitee.com/Duke_Bit/eventpost)
 - @duke/elf-dialog CustomDialog黑魔法 不依赖promptAction 实现的函数级弹窗，省去复杂的模版代码，让你专注于你的业务，一行代码搞定弹窗: [https://gitee.com/Duke_Bit/elf-dialog](https://gitee.com/Duke_Bit/elf-dialog)
 - @duke/elf-refresh OpenHarmony 刷新组件，支持下拉刷新和上拉加载更多，支持各种组件，List、Grid，支持header，footer，目标打造HarmonyOS的SmartRefreshLayout: [https://gitee.com/Duke_Bit/ElfRefresh](https://gitee.com/Duke_Bit/ElfRefresh)
