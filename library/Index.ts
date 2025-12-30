@@ -1,4 +1,4 @@
-export { LifecycleOwner, Lifecycle } from './src/main/ets/Lifecycle';
+export { LifecycleOwner, Lifecycle, getCurrentLifecycle } from './src/main/ets/Lifecycle';
 
 export { LifecycleEventObserver } from './src/main/ets/LifecycleEventObserver';
 

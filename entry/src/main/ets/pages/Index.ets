@@ -1,6 +1,6 @@
 import { ZRouter } from '@hzw/zrouter';
 import { AppRouter } from '@zhongrui/app_router';
-import { Lifecycle, LifecycleOwner } from '@duke/component-lifecycle';
+import { getCurrentLifecycle, Lifecycle, LifecycleOwner } from '@duke/component-lifecycle';
 import { Custom1Component } from './CustomComponent';
 import { router, Router } from '@kit.ArkUI';
 
@@ -8,7 +8,7 @@ import { router, Router } from '@kit.ArkUI';
 @Component
 struct Index {
   @State message: string = 'Hello World';
-  @LifecycleOwner lifecycle: Lifecycle = new Lifecycle()
+  // @LifecycleOwner lifecycle: Lifecycle = new Lifecycle()
 
   @Builder
   getBuilder(path: string) {
@@ -17,7 +17,10 @@ struct Index {
   }
 
   aboutToAppear(): void {
-    this.lifecycle.addObserver((owner, state) => {
+    // this.lifecycle.addObserver((owner, state) => {
+    //   console.log('lifecycle', state, owner)
+    // })
+    getCurrentLifecycle(this)?.addObserver((owner, state)=>{
       console.log('lifecycle', state, owner)
     })
   }
@@ -56,7 +59,7 @@ struct Index {
     // .navDestination(this.getBuilder)
   }
 
-  onDidBuild(): void {
-    console.log('111')
-  }
+  // onDidBuild(): void {
+  //   console.log('111')
+  // }
 }

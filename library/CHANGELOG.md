@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.0.0] 2025.12
+
+- 新增Lifecycle切入点，方便其他库自行注入
+- 新增getCurrentLifecycle方法，方便获取当前组件的Lifecycle实例
+
 ## [v1.0.3] 2025.09
 
 - 修改LifecycleOwner方法申明，帮助IDE寻找装饰器，提升使用者开发效率

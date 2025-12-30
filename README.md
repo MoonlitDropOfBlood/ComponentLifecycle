@@ -17,7 +17,7 @@ Lifecycle 对象所跟踪的组件的当前状态。
 
 ## 下载安装
 
-````
+````extendtypescript
 ohpm install @duke/component-lifecycle
 ````
 
@@ -26,7 +26,9 @@ OpenHarmony ohpm
 
 ## 使用说明
 
-```
+### 使用装饰器方式
+
+```extendtypescript
 import { Lifecycle, LifecycleOwner } from "@duke/component-lifecycle";
 import { LifecycleState } from "@duke/component-lifecycle";
 
@@ -48,15 +50,48 @@ export struct Custom1Component{
 }
 ```
 
+### 使用getCurrentLifecycle函数方式
+
+```extendtypescript
+import { getCurrentLifecycle } from "@duke/component-lifecycle";
+import { LifecycleState } from "@duke/component-lifecycle";
+
+@ComponentV2
+export struct Custom2Component{
+
+  aboutToAppear(): void {
+    // 获取其他组件的生命周期实例
+    let lifecycle = getCurrentLifecycle(this.componentRef.current);
+    lifecycle?.addObserver((owner: CustomComponent, state: LifecycleState) => {
+      console.log('lifecycle', state, owner)
+    });
+  }
+
+  build() {
+    Column(){
+      CustomComponent()
+    }
+  }
+}
+```
+
 ## 接口说明
 
 ### Lifecycle
 
 | 方法名            | 入参                     | 接口描述                   |
 |:---------------|:-----------------------|:-----------------------|
-| addOberver     | LifecycleEventObserver | 添加观察者                  |
+| addObserver    | LifecycleEventObserver | 添加观察者                  |
 | removeObserver | LifecycleEventObserver | 移除观察者                  |
-| release        | 释放                     | 框架内部释放资源，请勿随意调用，容易出现问题 |        |           |
+| release        |                        | 框架内部释放资源，请勿随意调用，容易出现问题 |
+
+### getCurrentLifecycle 函数
+
+| 参数名       | 类型  | 说明   | 返回值                  |
+|:----------|:----|:-----|:---------------------|
+| component | any | 组件实例 | Lifecycle\|undefined |
+
+**接口描述**：获取组件的生命周期实例。如果组件已经有生命周期实例，则直接返回；如果没有，则创建一个新的生命周期实例并注入到组件中。
 
 ### LifecycleOwner 装饰器
 
@@ -77,10 +112,10 @@ export struct Custom1Component{
 | ON_DISAPPEAR | 8 | 组件销毁                                                     |
 
 ###  LifecycleEventObserver
-| 入参    | 说明       |
-|:------|:---------|
-| owner | 触发的自定义组件 |
-| state | 当前生命周期状态 |
+| 入参     | 说明        |
+|:-------|:----------|
+| source | 触发事件的组件对象 |
+| event  | 当前生命周期状态  |
 
 ## 约束与限制
 
