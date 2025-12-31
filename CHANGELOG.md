@@ -3,6 +3,7 @@
 ## [v2.0.1] 2025.12
 
 - 新增LIFECYCLE_INIT_CALLBACK暴露点，方便在初始化时调用回调
+- fix: 修复LIFECYCLE_DEFAULT在aboutToAppear中未被赋值的问题
 
 ## [v2.0.0] 2025.12
 

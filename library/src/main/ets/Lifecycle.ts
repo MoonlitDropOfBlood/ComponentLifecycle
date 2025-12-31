@@ -66,6 +66,9 @@ export const LifecycleOwner:PropertyDecorator = (target: any, name: string) => {
     target.aboutToAppear = function () {
       if(this[name]){
         this[LIFECYCLE_DEFAULT] = this[name]
+      }else {
+        this[name] = new Lifecycle()
+        this[LIFECYCLE_DEFAULT] = this[name]
       }
       oldFunction.call(this);
       this[LIFECYCLE_INIT].call(this)
@@ -73,6 +76,9 @@ export const LifecycleOwner:PropertyDecorator = (target: any, name: string) => {
   } else {
     target.aboutToAppear = function () {
       if(this[name]){
+        this[LIFECYCLE_DEFAULT] = this[name]
+      }else {
+        this[name] = new Lifecycle()
         this[LIFECYCLE_DEFAULT] = this[name]
       }
       this[LIFECYCLE_INIT].call(this)
