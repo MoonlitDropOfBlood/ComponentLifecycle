@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.0.1] 2025.12
+
+- 新增LIFECYCLE_INIT_CALLBACK暴露点，方便在初始化时调用回调
+
 ## [v2.0.0] 2025.12
 
 - 新增Lifecycle切入点，方便其他库自行注入

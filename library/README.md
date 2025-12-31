@@ -2,7 +2,7 @@
 
 ## 简介
 
-[![openHarmony](https://img.shields.io/badge/openharmony-v1.0.3-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases/tag/v1.0.3)
+[![openHarmony](https://img.shields.io/badge/openharmony-v2.0.1-brightgreen)](https://gitee.com/Duke_Bit/component-lifecycle/releases/tag/v2.0.1)
 
 ComponentLifecycle，是一个库，用于存储有关组件（如 Router 或 NavDestination）的生命周期状态的信息，并允许其他对象观测此状态。
 支持目前两种路由形式Router和NavDestination。
